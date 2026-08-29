@@ -73,6 +73,12 @@ bool get_vmx_operation(void){
     }
     vmxon_phy_region = __pa(vmxon_region);
     *(uint32_t*) vmxon_region = vmx_get_revision_id();
+
+    if (_vmxon(vmxon_phy_region)!=0){
+        pr_err("GHV: failed to send VMXON\n");
+        return false;
+    }
+    pr_info("GHV: VMXON successful\n");
     return true;
 }
 
@@ -92,6 +98,7 @@ static int __init ghv_init(void){
     }
 
     pr_info("GHV: VMX setup successful\n");
+
     return 0;
 }
 
