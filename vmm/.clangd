@@ -1,0 +1,12 @@
+CompileFlags:
+  CompilationDatabase: vmm/compile_commands.host.json
+  Remove:
+    - "-mpreferred-stack-boundary=*"
+    - "-mindirect-branch=*"
+    - "-mindirect-branch-register"
+    - "-mfunction-return=*"
+    - "-mharden-sls=*"
+    - "-mrecord-mcount"
+    - "-mfentry"
+    - "-fconserve-stack"
+    - "-fsanitize=bounds-strict"
