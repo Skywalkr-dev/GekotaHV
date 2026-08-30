@@ -66,7 +66,7 @@ bool get_vmx_operation(void){
         "mov %0, %%cr4"
         : :"r"(cr4) : "memory"
     );
-    void* vmxon_region = kzalloc(VMCS_PAGE_SIZE,GFP_KERNEL);
+void* vmxon_region = kzalloc(VMCS_PAGE_SIZE,GFP_KERNEL);
     if (vmxon_region==NULL){
         pr_info("GHV: Unable to allocate space for VMXON region\n");
         return false;
