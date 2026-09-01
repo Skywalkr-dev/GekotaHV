@@ -8,10 +8,11 @@
 
 #define VMCS_PAGE_SIZE                            4096
 #define CPU_BASED_VM_EXEC_CONTROL                 0x4002
+#define MSR_IA32_VMX_PINBASED_CTLS		          0x00000481
+#define PIN_BASED_VM_EXEC_CONTROLS		          0x00004000
+
 static void* vmcs_region;
 static phys_addr_t vmcs_phy_region;
-
-
 
 bool vmcs_init(void) {
     vmcs_region = kzalloc(VMCS_PAGE_SIZE,GFP_KERNEL);
@@ -26,7 +27,9 @@ bool vmcs_init(void) {
         pr_info("GHV: failed to clear allocated space\n");
         return false;
     } 
-    _vmptrld(vmcs_phy_region);
+    if (!_vmptrld(vmcs_phy_region)){
+        return false;
+    }
 
     return true;
 }

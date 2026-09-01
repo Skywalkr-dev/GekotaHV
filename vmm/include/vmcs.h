@@ -18,11 +18,14 @@ static inline u8 _vmclear(phys_addr_t vmcs_phy){
 
 static inline void _vmptrld(phys_addr_t vmcs_phy){
     u64 physc = (u64)vmcs_phy;
+    u8 ret;
     asm volatile(
-        "vmptrld %[mem]"
-        : :[mem] "m"(physc) 
+        "vmptrld %[mem];setna %[ret_val]"
+        :[ret_val] "m"(ret) 
+        :[mem] "m"(physc) 
         :"memory"
     );
+    return ret;
 }
 
 static inline void _vmwrite(u64 field_encoding,u64 value){
