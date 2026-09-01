@@ -5,6 +5,9 @@
 
 #define MSR_IA32_VMX_BASIC              0x00000480
 
+bool vmx_support(void);
+bool get_vmx_operation(void);
+
 static inline uint64_t read_cr4(void){
     uint64_t ret;
     asm volatile(

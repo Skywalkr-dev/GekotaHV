@@ -1,6 +1,7 @@
 obj-m += ghv.o
 
-ghv-objs := src/vmx.o
+GHV_SRC := $(wildcard src/*.c)
+ghv-objs := $(GHV_SRC:.c=.o)
 
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD  := $(shell pwd)

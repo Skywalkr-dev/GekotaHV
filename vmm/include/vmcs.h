@@ -2,6 +2,8 @@
 #include <linux/types.h>
 
 
+bool vmcs_init(void);
+
 static inline u8 _vmclear(phys_addr_t vmcs_phy){
     u64 physc = (u64)vmcs_phy;
     u8 ret;
